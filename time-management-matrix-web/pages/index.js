@@ -1,8 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function Home() {
+  const { data: session } = useSession();
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,7 +16,12 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Time Management Matrix</h1>
-        <p>Coming Soon...</p>
+        <h2>You're currently {session ? "logged in." : "logged out."}</h2>
+        {session ? (
+          <button onClick={() => signOut()}>Sign out</button>
+        ) : (
+          <button onClick={() => signIn()}>Sign in</button>
+        )}
       </main>
     </div>
   );
