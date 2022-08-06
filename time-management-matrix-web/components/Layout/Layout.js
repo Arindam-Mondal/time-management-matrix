@@ -4,7 +4,7 @@ function Layout(props) {
   return (
     <div>
       <TopAppBar></TopAppBar>
-      <main></main>
+      <main>{props.children}</main>
     </div>
   );
 }
