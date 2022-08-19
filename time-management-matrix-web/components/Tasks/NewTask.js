@@ -16,7 +16,13 @@ import Box from "@mui/material/Box";
 
 function NewTask(props) {
   const [open, setOpen] = useState(props.open);
-  const [value, setValue] = useState(null);
+  const [startTime, setStartTime] = useState(null);
+  const [endTime, setEndTime] = useState(null);
+  const [plannedUrgent, setPlannedUrgent] = useState(false);
+  const [plannedImportant, setPlannedImportant] = useState(false);
+  const [plannedComplete, setPlannedComplete] = useState(false);
+  const [actualImportant, setActualImportant] = useState(false);
+  const [actualUrgent, setActualUrgent] = useState(false);
 
   const startTimeInputRef = useRef();
   const endTimeInputRef = useRef();
@@ -28,12 +34,22 @@ function NewTask(props) {
   const isUrgentActualRef = useRef();
   const isImportantActualRef = useRef();
 
+  const PLANNED_URGENT = "PLANNED_URGENT";
+  const PLANNED_IMPORTANT = "PLANNED_IMPORTANT";
+  const PLANNED_COMPLETE = "PLANNED_COMPLETE";
+  const ACTUAL_URGENT = "PLANNED_URGENT";
+  const ACTUAL_IMPORTANT = "PLANNED_IMPORTANT";
+
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleCheckEventChange = (event, updateCheckhandler) => {
+    updateCheckhandler(event.target.checked);
   };
 
   const handleAdd = () => {
@@ -76,24 +92,28 @@ function NewTask(props) {
       </Box>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Plan a new Task</DialogTitle>
-        <DialogContent>
+        <DialogContent style={{ paddingTop: "0.5em" }}>
           <TimePicker
             label="Start Time"
-            value={value}
+            value={startTime}
             onChange={(newValue) => {
-              setValue(newValue);
+              setStartTime(newValue);
             }}
             inputRef={startTimeInputRef}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => (
+              <TextField {...params} sx={{ padding: "0em 0.5em" }} />
+            )}
           />
           <TimePicker
             label="End Time"
-            value={value}
+            value={endTime}
             onChange={(newValue) => {
-              setValue(newValue);
+              setEndTime(newValue);
             }}
             inputRef={endTimeInputRef}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={(params) => (
+              <TextField {...params} sx={{ padding: "0em 0.5em" }} />
+            )}
           />
           <TextField
             autoFocus
@@ -104,10 +124,33 @@ function NewTask(props) {
             variant="standard"
             inputRef={plannedTaskInputRef}
           />
-          Urgent <Checkbox defaultChecked inputRef={isUrgentPlannedRef} />
-          Important <Checkbox defaultChecked inputRef={isImportantPlannedRef} />
+          Urgent{" "}
+          <Checkbox
+            inputRef={isUrgentPlannedRef}
+            checked={plannedUrgent}
+            onChange={(event) =>
+              handleCheckEventChange(event, setPlannedUrgent)
+            }
+            value={plannedUrgent}
+          />
+          Important{" "}
+          <Checkbox
+            inputRef={isImportantPlannedRef}
+            checked={plannedImportant}
+            onChange={(event) =>
+              handleCheckEventChange(event, setPlannedImportant)
+            }
+            value={plannedImportant}
+          />
           Completed as Planned{" "}
-          <Checkbox defaultChecked inputRef={isCompleteInputRef} />
+          <Checkbox
+            inputRef={isCompleteInputRef}
+            checked={plannedComplete}
+            onChange={(event) =>
+              handleCheckEventChange(event, setPlannedComplete)
+            }
+            value={plannedComplete}
+          />
           <TextField
             autoFocus
             margin="dense"
@@ -117,8 +160,22 @@ function NewTask(props) {
             variant="standard"
             inputRef={actualTaskInputRef}
           />
-          Urgent <Checkbox defaultChecked inputRef={isUrgentActualRef} />
-          Important <Checkbox defaultChecked inputRef={isImportantActualRef} />
+          Urgent{" "}
+          <Checkbox
+            inputRef={isUrgentActualRef}
+            checked={actualUrgent}
+            onChange={(event) => handleCheckEventChange(event, setActualUrgent)}
+            value={actualUrgent}
+          />
+          Important{" "}
+          <Checkbox
+            inputRef={isImportantActualRef}
+            checked={actualImportant}
+            onChange={(event) =>
+              handleCheckEventChange(event, setActualImportant)
+            }
+            value={actualImportant}
+          />
         </DialogContent>
 
         <DialogActions>
