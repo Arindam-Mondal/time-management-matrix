@@ -10,6 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
 import { createTheme } from "@mui/material/styles";
+import Chip from "@mui/material/Chip";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#E1E8FF",
@@ -25,36 +26,47 @@ const theme = createTheme();
 function Task(props) {
   return (
     // <Box sx={{ width: "100%", padding: "2em 5em" }}>
+
     <Item>
       <Grid container>
-        <Grid item xs={2}>
-          <Typography>
-            <IconButton aria-label="delete">
-              <AlarmIcon />
-            </IconButton>
-            <br />
-            4AM-5AM
-          </Typography>
+        <Grid item xs={12}>
+          {props.startTime} - {props.endTime}
         </Grid>
-        <Grid item xs={4}>
-          <Grid item xs={12}>
-            <Typography variant="h5">Practice Yoga</Typography>
-          </Grid>
+        {props.isComplete == "true" ? (
+          <Grid item xs={8}>
+            <Grid item xs={12}>
+              <Typography>{props.plannedTask}</Typography>
+            </Grid>
 
-          <Grid item xs={12}>
-            Urgent <Checkbox defaultChecked />
-            Important <Checkbox defaultChecked />
+            <Grid item xs={12}>
+              {props.isUrgentPlanned == "true" ? (
+                <Chip label="Urgent" />
+              ) : (
+                <></>
+              )}
+              {props.isImportantPlanned == "true" ? (
+                <Chip label="Important" />
+              ) : (
+                <></>
+              )}
+            </Grid>
           </Grid>
-        </Grid>
-        <Grid item xs={4}>
-          <Grid item xs={12}>
-            <Typography variant="h5">Meeting with Catchy</Typography>
+        ) : (
+          <Grid item xs={8}>
+            <Grid item xs={12}>
+              <Typography>{props.actualTask}</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              {props.isUrgentActual == "true" ? <Chip label="Urgent" /> : <></>}
+              {props.isImportantActual == "true" ? (
+                <Chip label="Important" />
+              ) : (
+                <></>
+              )}
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            Urgent <Checkbox defaultChecked />
-            Important <Checkbox defaultChecked />
-          </Grid>
-        </Grid>
+        )}
+
         <Grid
           item
           xs={1}

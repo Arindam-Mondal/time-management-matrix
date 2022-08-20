@@ -12,13 +12,7 @@ async function handler(req, res) {
         mongoPassword +
         "@cluster0.cy2lntj.mongodb.net/task?retryWrites=true&w=majority"
     );
-    console.log(
-      "mongodb+srv://" +
-        mongoUsername +
-        ":" +
-        mongoPassword +
-        "@cluster0.cy2lntj.mongodb.net/task?retryWrites=true&w=majority"
-    );
+
     const db = client.db();
     const taskCollection = db.collection("tasks");
     const result = await taskCollection.insertOne(data);

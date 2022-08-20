@@ -2,10 +2,19 @@ import TaskList from "../../components/Tasks/TaskList";
 import NewTask from "../../components/Tasks/NewTask";
 import { Fragment } from "react";
 import { useSession } from "next-auth/react";
+import useSWR from "swr";
+import { Box } from "@mui/material";
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function Tasks(props) {
   const { data: session } = useSession();
   const [today] = new Date().toISOString().split("T");
+  const nothing = "";
+  const { data, error } = useSWR(
+    "/api/tasks/" + session?.user?.email + "/" + today,
+    fetcher
+  );
 
   async function addTaskHandler(enteredTaskData) {
     enteredTaskData = {
@@ -21,21 +30,21 @@ function Tasks(props) {
       },
     });
 
-    const data = await response.json();
+    const newTask = await response.json();
 
-    console.log(data);
+    console.log(newTask);
   }
   return (
-    <Fragment>
+    <Box>
       {session ? (
         <>
-          <TaskList></TaskList>
+          <TaskList tasks={data}></TaskList>
           <NewTask open={false} onAddTask={addTaskHandler}></NewTask>
         </>
       ) : (
         <></>
       )}
-    </Fragment>
+    </Box>
   );
 }
 
