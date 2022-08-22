@@ -16,7 +16,7 @@ export const topAppBarTheme = createTheme({
         // Name of the slot
         root: {
           // Some CSS
-          backgroundColor: "#fff8e1",
+          backgroundColor: "#212121",
         },
       },
     },
@@ -25,9 +25,9 @@ export const topAppBarTheme = createTheme({
         // Name of the slot
         root: {
           // Some CSS
-          backgroundColor: "#fff8e1",
+          backgroundColor: "#212121",
           padding: "0 5em",
-          color: "#ffa000",
+          color: "#eceff1",
           fontWeight: 900,
         },
       },
