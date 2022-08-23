@@ -16,7 +16,7 @@ export const topAppBarTheme = createTheme({
         // Name of the slot
         root: {
           // Some CSS
-          backgroundColor: "#212121",
+          backgroundColor: "white",
         },
       },
     },
@@ -25,10 +25,19 @@ export const topAppBarTheme = createTheme({
         // Name of the slot
         root: {
           // Some CSS
-          backgroundColor: "#212121",
+          backgroundColor: "white",
           padding: "0 5em",
-          color: "#eceff1",
+          color: "#415381",
           fontWeight: 900,
+        },
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          fontFamily: "Arima",
         },
       },
     },
