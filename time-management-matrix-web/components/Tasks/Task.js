@@ -11,11 +11,13 @@ import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
-import Image from "../../public/task-card.png";
+import Image from "../../public/task-curve.png";
 
 const Item = styled(Paper)(({ theme }) => ({
-  // backgroundColor: "#1a237e",
-  backgroundImage: "linear-gradient(#bbdefb, white)",
+  backgroundColor: "#e3f2fd",
+  // backgroundImage: "linear-gradient(#bbdefb, white)",
+  backgroundImage: `url(${Image.src})`,
+  backgroundSize: "cover",
   //   color: "#0070FF",
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -86,7 +88,7 @@ function Task(props) {
               <Grid item xs={12}>
                 <Typography
                   sx={{
-                    minHeight: "50px",
+                    minHeight: "35px",
                   }}
                 >
                   {props.plannedTask}

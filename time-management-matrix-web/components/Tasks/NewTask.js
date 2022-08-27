@@ -81,7 +81,7 @@ function NewTask(props) {
 
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
-      <Box sx={{ width: "100%", padding: "0em 5em" }}>
+      <Box sx={{ width: "100%", paddingTop: "2em" }}>
         <Typography align="right">
           <ThemeProvider theme={buttonOrageOutlineTheme}>
             <Button variant="outlined" onClick={handleClickOpen}>
