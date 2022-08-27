@@ -30,10 +30,16 @@ function TaskDate(props) {
   };
   return (
     <Grid container justifyContent="center" sx={{ marginBottom: "0.5em" }}>
-      <Typography sx={{ backgroundColor: "#e3f2fd", borderRadius: "20px" }}>
+      <Typography
+        sx={{
+          backgroundColor: "#ffa000",
+          borderRadius: "20px",
+          color: "#e3f2fd",
+        }}
+      >
         <IconButton
           aria-label="Back"
-          sx={{ color: "#415381" }}
+          sx={{ color: "#e3f2fd" }}
           onClick={() => {
             dateChangeHandler("PREV");
           }}
@@ -43,7 +49,7 @@ function TaskDate(props) {
         {date}
         <IconButton
           aria-label="Forward"
-          sx={{ color: "#415381" }}
+          sx={{ color: "#e3f2fd" }}
           onClick={() => {
             dateChangeHandler("NEXT");
           }}

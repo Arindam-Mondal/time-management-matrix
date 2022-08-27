@@ -2,7 +2,7 @@ import { useState } from "react";
 import TaskList from "../../components/Tasks/TaskList";
 import NewTask from "../../components/Tasks/NewTask";
 import { useSession } from "next-auth/react";
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { Box, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { Grid } from "@mui/material";
@@ -23,13 +23,18 @@ function Tasks(props) {
   function updateDateHandler(date) {
     useDate(date);
   }
+
+  /**
+   * Handler to add New Task
+   * @param {*} enteredTaskData
+   */
   async function addTaskHandler(enteredTaskData) {
     enteredTaskData = {
       ...enteredTaskData,
       user: session.user.email,
       taskDate: date,
     };
-    const response = await fetch("/api/new-task", {
+    await fetcher("/api/new-task", {
       method: "POST",
       body: JSON.stringify(enteredTaskData),
       headers: {
@@ -37,9 +42,9 @@ function Tasks(props) {
       },
     });
 
-    const newTask = await response.json();
-
-    console.log(newTask);
+    //mutating as fetcher would not know that there has been an update in the dab and can fetch the latest data from db.
+    //[TODO] remove the hardcoded url and store it in a constant
+    mutate("/api/tasks/" + session?.user?.email + "/" + date);
   }
 
   return (
