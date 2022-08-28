@@ -12,6 +12,7 @@ function TaskList(props) {
       {props.tasks.tasks.map((task) => (
         <Task
           key={task._id}
+          taskId={task._id}
           startTime={task.startTime}
           endTime={task.endTime}
           plannedTask={task.plannedTask}
@@ -21,6 +22,8 @@ function TaskList(props) {
           actualTask={task.actualTask}
           isUrgentActual={task.isUrgentActual}
           isImportantActual={task.isImportantActual}
+          status={task.status}
+          onTaskComplete={props.onTaskComplete}
         ></Task>
       ))}
     </Fragment>

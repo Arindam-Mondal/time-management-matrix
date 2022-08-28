@@ -1,12 +1,8 @@
 import * as React from "react";
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import AlarmIcon from "@mui/icons-material/Alarm";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-import IconButton from "@mui/material/IconButton";
 import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -73,35 +69,49 @@ const theme = createTheme({
 });
 
 function Task(props) {
+  const [isComplete, setIsComplete] = useState(props.isComplete);
   return (
     // <Box sx={{ width: "100%", padding: "2em 5em" }}>
     <ThemeProvider theme={theme}>
       <Item>
         <Grid container>
-          <Typography variant="taskheader">
-            <Grid item xs={12}>
+          <Grid item xs={11}>
+            <Typography variant="taskheader">
               {props.startTime} - {props.endTime}
-            </Grid>
-          </Typography>
-          {props.isComplete == "true" ? (
-            <Grid item xs={12}>
+            </Typography>
+          </Grid>
+          <Grid item xs={1}>
+            <Checkbox
+              checked={isComplete}
+              sx={{ paddingTop: "0", paddingBottom: "0" }}
+              onChange={(event) => {
+                props.onTaskComplete({
+                  id: props.taskId,
+                  isComplete: event.target.checked,
+                });
+                setIsComplete(event.target.checked);
+              }}
+            />
+          </Grid>
+          {props.status === "ENTERED" || props.status === "DONE" ? (
+            <Grid container item xs={12}>
               <Grid item xs={12}>
                 <Typography
                   sx={{
-                    minHeight: "35px",
+                    minHeight: "30px",
                   }}
                 >
                   {props.plannedTask}
                 </Typography>
               </Grid>
-
               <Grid item xs={12}>
-                {props.isUrgentPlanned == "true" ? (
+                {props.isUrgentPlanned ? (
                   <Chip size="small" label="Urgent" variant="urgent" />
                 ) : (
                   <></>
                 )}
-                {props.isImportantPlanned == "true" ? (
+
+                {props.isImportantPlanned ? (
                   <Chip size="small" label="Important" variant="important" />
                 ) : (
                   <></>
@@ -114,12 +124,12 @@ function Task(props) {
                 <Typography>{props.actualTask}</Typography>
               </Grid>
               <Grid item xs={12}>
-                {props.isUrgentActual == "true" ? (
+                {props.isUrgentActual ? (
                   <Chip size="small" label="Urgent" variant="urgent" />
                 ) : (
                   <></>
                 )}
-                {props.isImportantActual == "true" ? (
+                {props.isImportantActual ? (
                   <Chip size="small" label="Important" variant="important" />
                 ) : (
                   <></>

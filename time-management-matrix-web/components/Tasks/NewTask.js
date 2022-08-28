@@ -53,15 +53,27 @@ function NewTask(props) {
   };
 
   const handleAdd = () => {
-    const enteredStartTime = startTimeInputRef.current.value;
-    const enteredEndTime = endTimeInputRef.current.value;
+    const enteredStartTime = startTime;
+    const enteredEndTime = endTime;
     const eneteredPlannedTask = plannedTaskInputRef.current.value;
-    const enteredIsUrgentPlanned = isUrgentPlannedRef.current.value;
-    const enteredIsImportantPlanned = isImportantPlannedRef.current.value;
-    const enteredIsComplete = isCompleteInputRef.current.value;
-    const enteredActualTask = actualTaskInputRef.current.value;
-    const enteredIsUrgentActual = isUrgentActualRef.current.value;
-    const enteredIsImportantActual = isImportantActualRef.current.value;
+    const enteredIsUrgentPlanned = plannedUrgent;
+    const enteredIsImportantPlanned = plannedImportant;
+    // const enteredIsComplete = isCompleteInputRef.current.value;
+    // const enteredActualTask = actualTaskInputRef.current.value;
+    // const enteredIsUrgentActual = isUrgentActualRef.current.value;
+    // const enteredIsImportantActual = isImportantActualRef.current.value;
+
+    // const taskData = {
+    //   startTime: enteredStartTime,
+    //   endTime: enteredEndTime,
+    //   plannedTask: eneteredPlannedTask,
+    //   isUrgentPlanned: enteredIsUrgentPlanned,
+    //   isImportantPlanned: enteredIsImportantPlanned,
+    //   isComplete: enteredIsComplete,
+    //   actualTask: enteredActualTask,
+    //   isUrgentActual: enteredIsUrgentActual,
+    //   isImportantActual: enteredIsImportantActual,
+    // };
 
     const taskData = {
       startTime: enteredStartTime,
@@ -69,10 +81,11 @@ function NewTask(props) {
       plannedTask: eneteredPlannedTask,
       isUrgentPlanned: enteredIsUrgentPlanned,
       isImportantPlanned: enteredIsImportantPlanned,
-      isComplete: enteredIsComplete,
-      actualTask: enteredActualTask,
-      isUrgentActual: enteredIsUrgentActual,
-      isImportantActual: enteredIsImportantActual,
+      status: "ENTERED",
+      isComplete: false,
+      actualTask: null,
+      isUrgentActual: false,
+      isImportantActual: false,
     };
 
     props.onAddTask(taskData);
@@ -142,7 +155,7 @@ function NewTask(props) {
             }
             value={plannedImportant}
           />
-          Completed as Planned{" "}
+          {/* Completed as Planned{" "}
           <Checkbox
             inputRef={isCompleteInputRef}
             checked={plannedComplete}
@@ -175,7 +188,7 @@ function NewTask(props) {
               handleCheckEventChange(event, setActualImportant)
             }
             value={actualImportant}
-          />
+          /> */}
         </DialogContent>
 
         <DialogActions>

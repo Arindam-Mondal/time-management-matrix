@@ -24,6 +24,26 @@ function Tasks(props) {
     useDate(date);
   }
 
+  async function taskCompleteHandler(data) {
+    console.table("Key" + data.id);
+    console.table("Value" + data.isComplete);
+    const updatedData = {
+      ...data,
+      status: data.isComplete ? "DONE" : "ENTERED",
+    };
+    await fetcher("/api/update-task", {
+      method: "POST",
+      body: JSON.stringify(updatedData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    //mutating as fetcher would not know that there has been an update in the dab and can fetch the latest data from db.
+    //[TODO] remove the hardcoded url and store it in a constant
+    mutate("/api/tasks/" + session?.user?.email + "/" + date);
+  }
+
   /**
    * Handler to add New Task
    * @param {*} enteredTaskData
@@ -55,7 +75,10 @@ function Tasks(props) {
           <Grid xs={10} sm={8} md={4} lg={4}>
             <TaskDate onUpdateDate={updateDateHandler} />
             {/* <Divider sx={{ margin: "1em 0em" }} /> */}
-            <TaskList tasks={data}></TaskList>
+            <TaskList
+              tasks={data}
+              onTaskComplete={taskCompleteHandler}
+            ></TaskList>
             <NewTask open={false} onAddTask={addTaskHandler}></NewTask>
           </Grid>
           <Grid xs={1} sm={2} md={4} lg={4}></Grid>
