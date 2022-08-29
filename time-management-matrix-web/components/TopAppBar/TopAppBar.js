@@ -13,6 +13,8 @@ import Tooltip from "@mui/material/Tooltip";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { ThemeProvider } from "@mui/material/styles";
 import { topAppBarTheme } from "../../theme/theme";
+import TimeManager from "../../public/time-manager-logo.svg";
+import Link from "next/link";
 
 const settings = ["Profile", "Logout"];
 
@@ -35,13 +37,23 @@ function TopAppBar(props) {
   return (
     <ThemeProvider theme={topAppBarTheme}>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="static" elevation={0}>
           <Toolbar>
-            <Typography
-              component="div"
-              sx={{ flexGrow: 1, fontWeight: 600, fontSize: "x-large" }}
-            >
-              Time Management Matrix
+            <Typography component="div" sx={{ flexGrow: 1 }}>
+              <Link href="/">
+                <a>
+                  <Box
+                    sx={{
+                      color: "red",
+                      backgroundImage: `url(${TimeManager.src})`,
+                      height: "50px",
+                      width: "200px",
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
+                    }}
+                  ></Box>
+                </a>
+              </Link>
             </Typography>
             {session ? (
               <Box sx={{ flexGrow: 0 }}>

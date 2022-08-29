@@ -6,6 +6,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Typography } from "@mui/material";
 import { Fragment } from "react";
 import Link from "next/link";
+import { Box } from "@mui/system";
+import TimeManager from "../public/header-tag-line.svg";
+import ManageTask from "../public/manage-task.svg";
 
 const theme = createTheme({
   typography: {
@@ -56,10 +59,22 @@ function Home(props) {
       </Head>
       <ThemeProvider theme={theme}>
         <Grid container sx={{ padding: "1px" }}>
-          <Grid item xs={12}>
-            <Typography variant="quote">
-              Either Run The Day Or The Day Runs You...
-            </Typography>
+          <Grid
+            item
+            xs={12}
+            sx={{ display: "flex", "justify-content": "center" }}
+          >
+            <Box
+              sx={{
+                color: "red",
+                backgroundImage: `url(${TimeManager.src})`,
+                height: "80px",
+                width: "700px",
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+                // backgrou,
+              }}
+            ></Box>
           </Grid>
           <Grid item xs={2} md={4}></Grid>
           <Grid item xs={8} md={4}>
@@ -72,12 +87,25 @@ function Home(props) {
                 // layout="fill"
               />
             </Grid>
-            <Grid item xs={12}>
-              <Typography variant="manage-task">
-                <Link href="/tasks">
-                  <a>Manage your task now</a>
-                </Link>
-              </Typography>
+            <Grid
+              item
+              xs={12}
+              sx={{ display: "flex", "justify-content": "center" }}
+            >
+              <Link href="/tasks">
+                <a>
+                  <Box
+                    sx={{
+                      backgroundImage: `url(${ManageTask.src})`,
+                      height: "80px",
+                      width: "700px",
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
+                      // backgrou,
+                    }}
+                  ></Box>
+                </a>
+              </Link>
             </Grid>
           </Grid>
           <Grid item xs={2} md={4}></Grid>

@@ -13,18 +13,13 @@ import SunsetImage from "../../public/sunset.png";
 import NightImage from "../../public/night.png";
 
 const Item = styled(Paper)(({ theme }) => ({
-  // backgroundColor: "#e3f2fd",
-  // backgroundImage: "linear-gradient(#bbdefb, white)",
-  // backgroundImage: `url(${SunsetImage.src})`,
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
   backgroundPosition: "right",
-  //   color: "#0070FF",
   ...theme.typography.body2,
   padding: theme.spacing(1),
   marginBottom: theme.spacing(0.5),
   minHeight: "85px",
-  //   color: theme.palette.text.secondary,
 }));
 
 const theme = createTheme({

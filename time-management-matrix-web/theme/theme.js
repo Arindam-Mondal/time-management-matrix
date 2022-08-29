@@ -26,7 +26,9 @@ export const topAppBarTheme = createTheme({
         root: {
           // Some CSS
           backgroundColor: "white",
-          padding: "0 5em",
+          paddingTop: "1em",
+          paddingLeft: "15em",
+          paddingRight: "15em",
           color: "#415381",
           fontWeight: 900,
         },
