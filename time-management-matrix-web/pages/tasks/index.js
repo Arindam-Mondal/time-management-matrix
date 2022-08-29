@@ -7,6 +7,7 @@ import { Box, Typography } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import { Grid } from "@mui/material";
 import TaskDate from "../../components/Tasks/TaskDate";
+import PlannedTaskProgress from "../../components/Tasks/PlannedTaskProgress";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -73,8 +74,8 @@ function Tasks(props) {
         <Grid container sx={{ justifyContent: "center", padding: "2em 0em" }}>
           <Grid xs={1} sm={2} md={4} lg={4}></Grid>
           <Grid xs={10} sm={8} md={4} lg={4}>
+            <PlannedTaskProgress></PlannedTaskProgress>
             <TaskDate onUpdateDate={updateDateHandler} />
-            {/* <Divider sx={{ margin: "1em 0em" }} /> */}
             <TaskList
               tasks={data}
               onTaskComplete={taskCompleteHandler}

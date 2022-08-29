@@ -37,7 +37,7 @@ function TopAppBar(props) {
   return (
     <ThemeProvider theme={topAppBarTheme}>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" elevation={0}>
+        <AppBar position="fixed" elevation={0}>
           <Toolbar>
             <Typography component="div" sx={{ flexGrow: 1 }}>
               <Link href="/">

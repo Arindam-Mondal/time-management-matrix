@@ -1,13 +1,11 @@
 import Head from "next/head";
 import Image from "next/image";
 import Grid from "@mui/material/Grid";
-// import styles from "../styles/Home.module.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Typography } from "@mui/material";
 import { Fragment } from "react";
 import Link from "next/link";
 import { Box } from "@mui/system";
-import TimeManager from "../public/header-tag-line.svg";
+import TimeManager from "../public/header-tag-line-quotes.svg";
 import ManageTask from "../public/manage-task.svg";
 
 const theme = createTheme({

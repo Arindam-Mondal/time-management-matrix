@@ -7,10 +7,10 @@ import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
-import SunriseImage from "../../public/sunrise.png";
-import NoonImage from "../../public/noon.png";
-import SunsetImage from "../../public/sunset.png";
-import NightImage from "../../public/night.png";
+import SunriseImage from "../../public/sunrise.svg";
+import NoonImage from "../../public/noon.svg";
+import SunsetImage from "../../public/sunset.svg";
+import NightImage from "../../public/night.svg";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundSize: "cover",
