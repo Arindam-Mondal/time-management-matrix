@@ -9,7 +9,7 @@ export default async (req, res) => {
     const tasks = await db
       .collection("tasks")
       .find({ user: user, taskDate: date })
-      .sort({ metacritic: -1 })
+      .sort({ startDate: -1 })
       .toArray();
 
     res.status(200).send({ tasks });

@@ -53,8 +53,8 @@ function NewTask(props) {
   };
 
   const handleAdd = () => {
-    const enteredStartTime = startTime;
-    const enteredEndTime = endTime;
+    const enteredStartTime = startTimeInputRef.current.value;
+    const enteredEndTime = endTimeInputRef.current.value;
     const eneteredPlannedTask = plannedTaskInputRef.current.value;
     const enteredIsUrgentPlanned = plannedUrgent;
     const enteredIsImportantPlanned = plannedImportant;

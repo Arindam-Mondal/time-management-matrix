@@ -7,17 +7,23 @@ import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
-import Image from "../../public/task-curve.png";
+import SunriseImage from "../../public/sunrise.png";
+import NoonImage from "../../public/noon.png";
+import SunsetImage from "../../public/sunset.png";
+import NightImage from "../../public/night.png";
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: "#e3f2fd",
+  // backgroundColor: "#e3f2fd",
   // backgroundImage: "linear-gradient(#bbdefb, white)",
-  backgroundImage: `url(${Image.src})`,
+  // backgroundImage: `url(${SunsetImage.src})`,
   backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "right",
   //   color: "#0070FF",
   ...theme.typography.body2,
   padding: theme.spacing(1),
   marginBottom: theme.spacing(0.5),
+  minHeight: "85px",
   //   color: theme.palette.text.secondary,
 }));
 
@@ -68,19 +74,39 @@ const theme = createTheme({
   },
 });
 
+function cardBackground(startTime) {
+  //first converting the time to lower case
+  const matches = startTime.toLowerCase().match(/(\d{1,2}):(\d{2}) ([ap]m)/);
+  const time =
+    parseInt(matches[1]) +
+    (matches[3] == "pm" ? 12 : 0) +
+    ":" +
+    matches[2] +
+    ":00";
+  const hour = time.split(":")[0];
+  if (hour <= 7) {
+    return SunriseImage;
+  } else if (hour > 7 && hour <= 16) {
+    return NoonImage;
+  } else if (hour > 16 && hour <= 18) {
+    return SunsetImage;
+  } else {
+    return NightImage;
+  }
+}
 function Task(props) {
   const [isComplete, setIsComplete] = useState(props.isComplete);
   return (
     // <Box sx={{ width: "100%", padding: "2em 5em" }}>
     <ThemeProvider theme={theme}>
-      <Item>
+      <Item
+        sx={{ backgroundImage: `url(${cardBackground(props.startTime).src})` }}
+      >
         <Grid container>
           <Grid item xs={11}>
             <Typography variant="taskheader">
               {props.startTime} - {props.endTime}
             </Typography>
-          </Grid>
-          <Grid item xs={1}>
             <Checkbox
               checked={isComplete}
               sx={{ paddingTop: "0", paddingBottom: "0" }}
