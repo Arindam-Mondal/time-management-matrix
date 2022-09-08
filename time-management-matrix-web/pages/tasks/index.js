@@ -74,7 +74,7 @@ function Tasks(props) {
         <Grid container sx={{ justifyContent: "center", padding: "2em 0em" }}>
           <Grid xs={1} sm={2} md={4} lg={4}></Grid>
           <Grid xs={10} sm={8} md={4} lg={4}>
-            <PlannedTaskProgress></PlannedTaskProgress>
+            <PlannedTaskProgress tasks={data}></PlannedTaskProgress>
             <TaskDate onUpdateDate={updateDateHandler} />
             <TaskList
               tasks={data}
