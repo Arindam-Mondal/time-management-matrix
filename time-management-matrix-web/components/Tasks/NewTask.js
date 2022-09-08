@@ -104,8 +104,15 @@ function NewTask(props) {
         </Typography>
       </Box>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Plan a new Task</DialogTitle>
-        <DialogContent style={{ paddingTop: "0.5em" }}>
+        <DialogTitle
+          sx={{
+            backgroundColor: "#ffa000",
+            padding: "0.5em 1em",
+          }}
+        >
+          Plan a new Task
+        </DialogTitle>
+        <DialogContent style={{ paddingTop: "1em" }}>
           <TimePicker
             label="Start Time"
             value={startTime}

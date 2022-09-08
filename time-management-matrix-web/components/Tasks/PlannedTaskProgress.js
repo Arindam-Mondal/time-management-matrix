@@ -1,31 +1,65 @@
 import Box from "@mui/material/Box";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import UrgentNoImpNo from "../../public/urgent-no-imp-no.svg";
 import UrgentNoImpYes from "../../public/urgent-no-imp-yes.svg";
 import UrgentYesImpNo from "../../public/urgent-yes-imp-no.svg";
 import UrgentYesImpYes from "../../public/urgent-yes-imp-yes.svg";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  typography: {
+    allVariants: {
+      fontFamily: "cursive",
+      textTransform: "none",
+    },
+  },
+});
 
 function PlannedTaskProgress(props) {
   return (
-    <Grid container justifyContent="center" sx={{ marginBottom: "0.5em" }}>
-      <Grid item xs={6}>
-        <Box
+    <ThemeProvider theme={theme}>
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        justify="center"
+        sx={{
+          marginBottom: "0.5em",
+        }}
+      >
+        <Grid
+          item
+          xs={6}
           sx={{
-            backgroundImage: `url(${UrgentYesImpNo.src})`,
-            height: "70px",
-            width: "200px",
-            backgroundSize: "contain",
-            backgroundRepeat: "no-repeat",
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            alignContent: "center",
+            justifyContent: "flex-end",
           }}
         >
-          20%
-        </Box>
-      </Grid>
-      <Grid item xs={6}>
-        <Box>
+          <Box
+            sx={{
+              backgroundImage: `url(${UrgentYesImpNo.src})`,
+              height: "70px",
+              width: "200px",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Typography>20%</Typography>
+          </Box>
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          sx={{
+            display: "flex",
+            alignContent: "center",
+            justifyContent: "flex-start",
+          }}
+        >
           <Box
             sx={{
               backgroundImage: `url(${UrgentYesImpYes.src})`,
@@ -38,12 +72,18 @@ function PlannedTaskProgress(props) {
               justifyContent: "center",
             }}
           >
-            40%
+            <Typography>40%</Typography>
           </Box>
-        </Box>
-      </Grid>
-      <Grid item xs={6}>
-        <Box>
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          sx={{
+            display: "flex",
+            alignContent: "center",
+            justifyContent: "flex-end",
+          }}
+        >
           <Box
             sx={{
               backgroundImage: `url(${UrgentNoImpNo.src})`,
@@ -56,12 +96,18 @@ function PlannedTaskProgress(props) {
               justifyContent: "center",
             }}
           >
-            80%
+            <Typography>80%</Typography>
           </Box>
-        </Box>
-      </Grid>
-      <Grid item xs={6}>
-        <Box>
+        </Grid>
+        <Grid
+          item
+          xs={6}
+          sx={{
+            display: "flex",
+            alignContent: "center",
+            justifyContent: "flex-start",
+          }}
+        >
           <Box
             sx={{
               backgroundImage: `url(${UrgentNoImpYes.src})`,
@@ -74,11 +120,11 @@ function PlannedTaskProgress(props) {
               justifyContent: "center",
             }}
           >
-            50%
+            <Typography>50%</Typography>
           </Box>
-        </Box>
+        </Grid>
       </Grid>
-    </Grid>
+    </ThemeProvider>
   );
 }
 

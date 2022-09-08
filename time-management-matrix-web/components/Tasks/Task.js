@@ -71,10 +71,11 @@ const theme = createTheme({
 
 function cardBackground(startTime) {
   //first converting the time to lower case
+  //TODO need top revisit the logic to handle all the conditions
   const matches = startTime.toLowerCase().match(/(\d{1,2}):(\d{2}) ([ap]m)/);
   const time =
     parseInt(matches[1]) +
-    (matches[3] == "pm" ? 12 : 0) +
+    (matches[1] != 12 && matches[3] == "pm" ? 12 : 0) +
     ":" +
     matches[2] +
     ":00";

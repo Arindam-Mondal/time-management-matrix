@@ -57,11 +57,7 @@ function Home(props) {
       </Head>
       <ThemeProvider theme={theme}>
         <Grid container sx={{ padding: "1px" }}>
-          <Grid
-            item
-            xs={12}
-            sx={{ display: "flex", "justify-content": "center" }}
-          >
+          <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
             <Box
               sx={{
                 color: "red",
@@ -70,7 +66,6 @@ function Home(props) {
                 width: "700px",
                 backgroundSize: "cover",
                 backgroundRepeat: "no-repeat",
-                // backgrou,
               }}
             ></Box>
           </Grid>
@@ -88,7 +83,7 @@ function Home(props) {
             <Grid
               item
               xs={12}
-              sx={{ display: "flex", "justify-content": "center" }}
+              sx={{ display: "flex", justifyContent: "center" }}
             >
               <Link href="/tasks">
                 <a>
