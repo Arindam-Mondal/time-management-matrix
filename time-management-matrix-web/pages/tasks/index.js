@@ -4,16 +4,19 @@ import NewTask from "../../components/Tasks/NewTask";
 import { useSession } from "next-auth/react";
 import useSWR, { mutate } from "swr";
 import { Box, Typography } from "@mui/material";
-import Divider from "@mui/material/Divider";
 import { Grid } from "@mui/material";
 import TaskDate from "../../components/Tasks/TaskDate";
-import PlannedTaskProgress from "../../components/Tasks/PlannedTaskProgress";
+import PlannedTaskProgressList from "../../components/Tasks/PlannedTaskProgressList";
+import AddchartTwoToneIcon from "@mui/icons-material/AddchartTwoTone";
+import DisabledByDefaultTwoToneIcon from "@mui/icons-material/DisabledByDefaultTwoTone";
+import { IconButton } from "@mui/material";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 function Tasks(props) {
   const { data: session } = useSession();
   const [today] = new Date().toISOString().split("T");
+  const [showProgress, setShowProgress] = useState(false);
   const [date, useDate] = useState(today);
   const nothing = "";
   const { data, error } = useSWR(
@@ -23,6 +26,10 @@ function Tasks(props) {
 
   function updateDateHandler(date) {
     useDate(date);
+  }
+
+  function toggleShowProgress() {
+    setShowProgress(!showProgress);
   }
 
   async function taskCompleteHandler(data) {
@@ -74,7 +81,45 @@ function Tasks(props) {
         <Grid container sx={{ justifyContent: "center", padding: "2em 0em" }}>
           <Grid xs={1} sm={2} md={4} lg={4}></Grid>
           <Grid xs={10} sm={8} md={4} lg={4}>
-            <PlannedTaskProgress tasks={data}></PlannedTaskProgress>
+            {data && data.tasks.length > 0 ? (
+              <Box>
+                {showProgress ? (
+                  <Box>
+                    <Box
+                      sx={{
+                        textAlign: "right",
+                      }}
+                    >
+                      <IconButton
+                        aria-label="show Progress"
+                        onClick={toggleShowProgress}
+                      >
+                        <DisabledByDefaultTwoToneIcon />
+                      </IconButton>
+                    </Box>
+                    <PlannedTaskProgressList
+                      tasks={data}
+                    ></PlannedTaskProgressList>
+                  </Box>
+                ) : (
+                  <Box
+                    sx={{
+                      textAlign: "right",
+                    }}
+                  >
+                    <IconButton
+                      aria-label="show Progress"
+                      onClick={toggleShowProgress}
+                    >
+                      <AddchartTwoToneIcon />
+                    </IconButton>
+                  </Box>
+                )}
+              </Box>
+            ) : (
+              <></>
+            )}
+
             <TaskDate onUpdateDate={updateDateHandler} />
             <TaskList
               tasks={data}
