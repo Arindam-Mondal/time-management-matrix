@@ -32,9 +32,7 @@ const theme = createTheme({
   components: {
     MuiChip: {
       styleOverrides: {
-        // Name of the slot
         root: {
-          // Some CSS
           marginRight: "2px",
         },
       },
