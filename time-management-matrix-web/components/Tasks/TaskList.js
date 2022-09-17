@@ -1,8 +1,6 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Task from "./Task";
 import { Fragment } from "react";
-import { Grid } from "@mui/material";
 
 function TaskList(props) {
   if (!props.tasks) return <div>Loading...</div>;

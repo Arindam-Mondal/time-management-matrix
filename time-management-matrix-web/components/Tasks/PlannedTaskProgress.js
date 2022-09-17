@@ -1,9 +1,5 @@
 import Box from "@mui/material/Box";
 import { Grid, Typography, Chip } from "@mui/material";
-// import UrgentNoImpNo from "../../public/urgent-no-imp-no.svg";
-// import UrgentNoImpYes from "../../public/urgent-no-imp-yes.svg";
-// import UrgentYesImpNo from "../../public/urgent-yes-imp-no.svg";
-// import UrgentYesImpYes from "../../public/urgent-yes-imp-yes.svg";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import LinearProgress from "@mui/material/LinearProgress";
 
