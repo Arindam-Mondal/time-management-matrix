@@ -17,7 +17,7 @@ function Tasks(props) {
   const { data: session } = useSession();
   const [today] = new Date().toISOString().split("T");
   const [showProgress, setShowProgress] = useState(false);
-  const [date, useDate] = useState(today);
+  const [date, setDate] = useState(today);
   const nothing = "";
   const { data, error } = useSWR(
     "/api/tasks/" + session?.user?.email + "/" + date,
@@ -25,7 +25,7 @@ function Tasks(props) {
   );
 
   function updateDateHandler(date) {
-    useDate(date);
+    setDate(date);
   }
 
   function toggleShowProgress() {
