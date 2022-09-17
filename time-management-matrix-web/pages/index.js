@@ -48,6 +48,7 @@ const theme = createTheme({
 });
 
 function Home(props) {
+  console.log("Console.log " + process.env.NEXTAUTH_SECRET);
   return (
     <Fragment>
       <Head>

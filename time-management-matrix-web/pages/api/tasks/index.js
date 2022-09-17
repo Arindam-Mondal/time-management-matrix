@@ -1,25 +1,17 @@
-import { MongoClient } from "mongodb";
+import clientPromise from "../../../lib/mongodb";
 
 export default async (req, res) => {
-  const mongoUsername = process.env.MONGO_USERNAME;
-  const mongoPassword = process.env.MONGO_PASSWORD;
+  try {
+    const client = await clientPromise;
+    const db = client.db();
+    const tasks = await db
+      .collection("tasks")
+      .find()
+      .sort({ startDate: -1 })
+      .toArray();
 
-  const client = await MongoClient.connect(
-    "mongodb+srv://" +
-      mongoUsername +
-      ":" +
-      mongoPassword +
-      "@cluster0.cy2lntj.mongodb.net/task?retryWrites=true&w=majority"
-  );
-
-  const db = client.db();
-  const taskCollection = db.collection("tasks");
-
-  const tasks = await taskCollection
-    .find({ user: "arindam@fittr.com" })
-    .sort({ metacritic: -1 })
-    .limit(20)
-    .toArray();
-
-  res.json(tasks);
+    res.status(200).send({ tasks });
+  } catch (err) {
+    res.status(500).send({ error: "failed to fetch data" });
+  }
 };
