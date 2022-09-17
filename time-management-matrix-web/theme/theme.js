@@ -8,7 +8,9 @@ export const buttonOrageOutlineTheme = createTheme({
   },
 });
 
-export const topAppBarTheme = createTheme({
+let theme = createTheme();
+
+export const topAppBarTheme = createTheme(theme, {
   components: {
     // Name of the component
     MuiToolbar: {
@@ -29,6 +31,14 @@ export const topAppBarTheme = createTheme({
           paddingTop: "1em",
           paddingLeft: "15em",
           paddingRight: "15em",
+          [theme.breakpoints.down("md")]: {
+            paddingLeft: "2em",
+            paddingRight: "2em",
+          },
+          [theme.breakpoints.down("sm")]: {
+            paddingLeft: "2em",
+            paddingRight: "2em",
+          },
           color: "#415381",
           fontWeight: 900,
         },
