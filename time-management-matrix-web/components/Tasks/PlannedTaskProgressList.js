@@ -1,10 +1,16 @@
 import { Fragment, useEffect, useState } from "react";
 import PlannedTaskProgress from "./PlannedTaskProgress";
 
-function PlannedTaskProgressMatrix(urgent, important, percentageCompletion) {
+function PlannedTaskProgressMatrix(
+  urgent,
+  important,
+  percentageCompletion,
+  taskCount
+) {
   this.urgent = urgent;
   this.important = important;
   this.percentageCompletion = percentageCompletion;
+  this.taskCount = taskCount;
 }
 
 function PlannedTaskProgressList(props) {
@@ -50,7 +56,8 @@ function PlannedTaskProgressList(props) {
       true,
       countUYIY == 0
         ? defaultProgress
-        : ((countUYIYDone / countUYIY) * 100).toFixed(2)
+        : ((countUYIYDone / countUYIY) * 100).toFixed(2),
+      countUYIY
     );
 
     const urgYesImpNo = new PlannedTaskProgressMatrix(
@@ -58,7 +65,8 @@ function PlannedTaskProgressList(props) {
       false,
       countUYIN == 0
         ? defaultProgress
-        : ((countUYINDone / countUYIN) * 100).toFixed(2)
+        : ((countUYINDone / countUYIN) * 100).toFixed(2),
+      countUYIN
     );
 
     const urgNoImpYes = new PlannedTaskProgressMatrix(
@@ -66,7 +74,8 @@ function PlannedTaskProgressList(props) {
       true,
       countUNIY == 0
         ? defaultProgress
-        : ((countUNIYDone / countUNIY) * 100).toFixed(2)
+        : ((countUNIYDone / countUNIY) * 100).toFixed(2),
+      countUNIY
     );
 
     const urgNoImpNo = new PlannedTaskProgressMatrix(
@@ -74,7 +83,8 @@ function PlannedTaskProgressList(props) {
       false,
       countUNIN == 0
         ? defaultProgress
-        : ((countUNINDone / countUNIN) * 100).toFixed(2)
+        : ((countUNINDone / countUNIN) * 100).toFixed(2),
+      countUNIN
     );
 
     const plannedTaskProgressMatrixArray = [
