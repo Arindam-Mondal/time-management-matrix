@@ -52,7 +52,13 @@ function Home(props) {
   return (
     <Box>
       {/* <ThemeProvider theme={theme}> */}
-      <Grid container sx={{ justifyContent: "center", padding: "1em 0em" }}>
+      <Grid
+        container
+        sx={{
+          justifyContent: "center",
+          padding: { xs: "2em 0em", md: "1em 0em" },
+        }}
+      >
         {/** Header Image in the Body :: Start */}
         <Grid item xs={1}></Grid>
         <Grid item xs={10} sx={{ display: "flex", justifyContent: "center" }}>
@@ -67,12 +73,23 @@ function Home(props) {
         {/** Header Image in the Body :: End */}
         {/** Main Image in the Body :: Start */}
         <Grid item xs={1}></Grid>
-        <Grid item xs={10} sx={{ display: "flex", justifyContent: "center" }}>
+        <Grid
+          item
+          xs={10}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            padding: { xs: "2em 0em", md: "0em 0em" },
+          }}
+        >
           <Image
             src="/main-page.png"
             alt="Picture of the author"
             width={450}
             height={300}
+            sx={{
+              padding: { xs: "5em 0em", md: "1em 0em" },
+            }}
             // layout="fill"
           />
         </Grid>
