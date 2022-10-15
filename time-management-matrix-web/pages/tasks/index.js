@@ -2,7 +2,7 @@ import { useState } from "react";
 import TaskList from "../../components/Tasks/TaskList";
 import NewTask from "../../components/Tasks/NewTask";
 import { useSession } from "next-auth/react";
-import useSWR, { mutate } from "swr";
+import useSWR, { useSWRConfig } from "swr";
 import { Box, Typography } from "@mui/material";
 import { Grid } from "@mui/material";
 import TaskDate from "../../components/Tasks/TaskDate";
@@ -19,6 +19,7 @@ function Tasks(props) {
   const [showProgress, setShowProgress] = useState(false);
   const [date, setDate] = useState(today);
   const nothing = "";
+  const { mutate } = useSWRConfig();
   const { data, error } = useSWR(
     "/api/tasks/" + session?.user?.email + "/" + date,
     fetcher
@@ -75,6 +76,20 @@ function Tasks(props) {
     mutate("/api/tasks/" + session?.user?.email + "/" + date);
   }
 
+  async function deleteTaskHandler(id) {
+    await fetcher("/api/tasks/delete/" + id, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    debugger;
+    //mutating as fetcher would not know that there has been an update in the dab and can fetch the latest data from db.
+    //[TODO] remove the hardcoded url and store it in a constant
+    mutate("/api/tasks/" + session?.user?.email + "/" + date);
+    console.log("test");
+  }
+
   return (
     <Box>
       {session ? (
@@ -124,6 +139,7 @@ function Tasks(props) {
             <TaskList
               tasks={data}
               onTaskComplete={taskCompleteHandler}
+              onDeleteTask={deleteTaskHandler}
             ></TaskList>
             <NewTask open={false} onAddTask={addTaskHandler}></NewTask>
           </Grid>

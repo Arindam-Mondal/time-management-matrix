@@ -22,6 +22,7 @@ function TaskList(props) {
           isImportantActual={task.isImportantActual}
           status={task.status}
           onTaskComplete={props.onTaskComplete}
+          onDeleteTask={props.onDeleteTask}
         ></Task>
       ))}
     </Fragment>

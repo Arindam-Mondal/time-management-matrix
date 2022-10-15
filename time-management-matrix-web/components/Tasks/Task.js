@@ -11,6 +11,10 @@ import SunriseImage from "../../public/sunrise.svg";
 import NoonImage from "../../public/noon.svg";
 import SunsetImage from "../../public/sunset.svg";
 import NightImage from "../../public/night.svg";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import ClearSharpIcon from "@mui/icons-material/ClearSharp";
+import { IconButton } from "@mui/material";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundSize: "cover",
@@ -93,72 +97,97 @@ function Task(props) {
   return (
     // <Box sx={{ width: "100%", padding: "2em 5em" }}>
     <ThemeProvider theme={theme}>
-      <Item
-        sx={{ backgroundImage: `url(${cardBackground(props.startTime).src})` }}
-      >
-        <Grid container>
-          <Grid item xs={11}>
-            <Typography variant="taskheader">
-              {props.startTime} - {props.endTime}
-            </Typography>
-            <Checkbox
-              checked={isComplete}
-              sx={{ paddingTop: "0", paddingBottom: "0" }}
-              onChange={(event) => {
-                props.onTaskComplete({
-                  id: props.taskId,
-                  isComplete: event.target.checked,
-                });
-                setIsComplete(event.target.checked);
-              }}
-            />
-          </Grid>
-          {props.status === "ENTERED" || props.status === "DONE" ? (
-            <Grid container item xs={12}>
-              <Grid item xs={12}>
-                <Typography
-                  sx={{
-                    minHeight: "30px",
+      <Grid container>
+        <Grid item xs={12}>
+          <Item
+          // sx={{ backgroundImage: `url(${cardBackground(props.startTime).src})` }}
+          >
+            <Grid container>
+              <Grid item xs={11}>
+                <Typography variant="taskheader">
+                  {props.startTime} - {props.endTime}
+                </Typography>
+                <Checkbox
+                  checked={isComplete}
+                  sx={{ paddingTop: "0", paddingBottom: "0" }}
+                  onChange={(event) => {
+                    props.onTaskComplete({
+                      id: props.taskId,
+                      isComplete: event.target.checked,
+                    });
+                    setIsComplete(event.target.checked);
+                  }}
+                />
+              </Grid>
+              <Grid item xs={1} textAlign="right">
+                <IconButton
+                  aria-label="Delete"
+                  size="small"
+                  onClick={() => {
+                    props.onDeleteTask(props.taskId);
                   }}
                 >
-                  {props.plannedTask}
-                </Typography>
+                  {/* onDeleteTask */}
+                  <ClearSharpIcon sx={{ fontSize: "small" }} />
+                </IconButton>
               </Grid>
-              <Grid item xs={12}>
-                {props.isUrgentPlanned ? (
-                  <Chip size="small" label="Urgent" variant="urgent" />
-                ) : (
-                  <></>
-                )}
 
-                {props.isImportantPlanned ? (
-                  <Chip size="small" label="Important" variant="important" />
-                ) : (
-                  <></>
-                )}
-              </Grid>
+              {props.status === "ENTERED" || props.status === "DONE" ? (
+                <Grid container item xs={12}>
+                  <Grid item xs={12}>
+                    <Typography
+                      sx={{
+                        minHeight: "30px",
+                      }}
+                    >
+                      {props.plannedTask}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    {props.isUrgentPlanned ? (
+                      <Chip size="small" label="Urgent" variant="urgent" />
+                    ) : (
+                      <></>
+                    )}
+
+                    {props.isImportantPlanned ? (
+                      <Chip
+                        size="small"
+                        label="Important"
+                        variant="important"
+                      />
+                    ) : (
+                      <></>
+                    )}
+                  </Grid>
+                </Grid>
+              ) : (
+                <Grid item xs={12}>
+                  <Grid item xs={12}>
+                    <Typography>{props.actualTask}</Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    {props.isUrgentActual ? (
+                      <Chip size="small" label="Urgent" variant="urgent" />
+                    ) : (
+                      <></>
+                    )}
+                    {props.isImportantActual ? (
+                      <Chip
+                        size="small"
+                        label="Important"
+                        variant="important"
+                      />
+                    ) : (
+                      <></>
+                    )}
+                  </Grid>
+                </Grid>
+              )}
             </Grid>
-          ) : (
-            <Grid item xs={12}>
-              <Grid item xs={12}>
-                <Typography>{props.actualTask}</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                {props.isUrgentActual ? (
-                  <Chip size="small" label="Urgent" variant="urgent" />
-                ) : (
-                  <></>
-                )}
-                {props.isImportantActual ? (
-                  <Chip size="small" label="Important" variant="important" />
-                ) : (
-                  <></>
-                )}
-              </Grid>
-            </Grid>
-          )}
+          </Item>
         </Grid>
-      </Item>
+      </Grid>
     </ThemeProvider>
   );
 }
