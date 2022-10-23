@@ -16,6 +16,9 @@ import Box from "@mui/material/Box";
 
 function NewTask(props) {
   const [open, setOpen] = useState(props.open);
+  const [isTaskError, setIsTaskError] = useState(false);
+  const [isStartTimeError, setIsStartTimeError] = useState(false);
+  const [isEndTimeError, setIsEndTimeError] = useState(false);
   const [startTime, setStartTime] = useState(null);
   const [endTime, setEndTime] = useState(null);
   const [plannedUrgent, setPlannedUrgent] = useState(false);
@@ -41,7 +44,13 @@ function NewTask(props) {
   const ACTUAL_IMPORTANT = "PLANNED_IMPORTANT";
 
   const handleClickOpen = () => {
+    resetError();
     setOpen(true);
+    //Reset the values:
+    setStartTime(null);
+    setEndTime(null);
+    setPlannedUrgent(null);
+    setPlannedImportant(null);
   };
 
   const handleClose = () => {
@@ -52,12 +61,24 @@ function NewTask(props) {
     updateCheckhandler(event.target.checked);
   };
 
+  /**
+   * Add a new task.
+   * Validates the data and if valid data is enetered - data is added to the database.
+   * @returns
+   */
   const handleAdd = () => {
+    //Resetting the error to false
+    //Once which are entered correctly should not show as error
+    resetError();
     const enteredStartTime = startTimeInputRef.current.value;
     const enteredEndTime = endTimeInputRef.current.value;
     const eneteredPlannedTask = plannedTaskInputRef.current.value;
     const enteredIsUrgentPlanned = plannedUrgent;
     const enteredIsImportantPlanned = plannedImportant;
+    if (!validateInput(eneteredPlannedTask, enteredStartTime, enteredEndTime)) {
+      return;
+    }
+
     // const enteredIsComplete = isCompleteInputRef.current.value;
     // const enteredActualTask = actualTaskInputRef.current.value;
     // const enteredIsUrgentActual = isUrgentActualRef.current.value;
@@ -92,6 +113,43 @@ function NewTask(props) {
     setOpen(false);
   };
 
+  /**
+   * Reset the Field Errors as true
+   */
+  function resetError() {
+    setIsTaskError(false);
+    setIsStartTimeError(false);
+    setIsEndTimeError(false);
+  }
+
+  /**
+   *
+   * @param {*} eneteredPlannedTask
+   * @param {*} enteredStartTime
+   * @param {*} enteredEndTime
+   * @returns if the enter fields are valid
+   */
+  function validateInput(
+    eneteredPlannedTask,
+    enteredStartTime,
+    enteredEndTime
+  ) {
+    let valid = true;
+    if (eneteredPlannedTask === "") {
+      setIsTaskError(true);
+      valid = false;
+    }
+    if (enteredStartTime === "") {
+      setIsStartTimeError(true);
+      valid = false;
+    }
+    if (enteredEndTime === "") {
+      setIsEndTimeError(true);
+      valid = false;
+    }
+    return valid;
+  }
+
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <Box sx={{ width: "100%", paddingTop: "2em" }}>
@@ -121,7 +179,12 @@ function NewTask(props) {
             }}
             inputRef={startTimeInputRef}
             renderInput={(params) => (
-              <TextField {...params} sx={{ padding: "0em 0.5em" }} />
+              <TextField
+                {...params}
+                required
+                error={isStartTimeError === true}
+                sx={{ padding: "0em 0.5em" }}
+              />
             )}
           />
           <TimePicker
@@ -132,7 +195,12 @@ function NewTask(props) {
             }}
             inputRef={endTimeInputRef}
             renderInput={(params) => (
-              <TextField {...params} sx={{ padding: "0em 0.5em" }} />
+              <TextField
+                {...params}
+                required
+                error={isEndTimeError === true}
+                sx={{ padding: "0em 0.5em" }}
+              />
             )}
           />
           <TextField
@@ -143,6 +211,9 @@ function NewTask(props) {
             fullWidth
             variant="standard"
             inputRef={plannedTaskInputRef}
+            required
+            error={isTaskError === true}
+            // helperText={isError === true ? "Planned task is mandatory" : ""}
           />
           Urgent{" "}
           <Checkbox
@@ -162,40 +233,6 @@ function NewTask(props) {
             }
             value={plannedImportant}
           />
-          {/* Completed as Planned{" "}
-          <Checkbox
-            inputRef={isCompleteInputRef}
-            checked={plannedComplete}
-            onChange={(event) =>
-              handleCheckEventChange(event, setPlannedComplete)
-            }
-            value={plannedComplete}
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Actual Task"
-            fullWidth
-            variant="standard"
-            inputRef={actualTaskInputRef}
-          />
-          Urgent{" "}
-          <Checkbox
-            inputRef={isUrgentActualRef}
-            checked={actualUrgent}
-            onChange={(event) => handleCheckEventChange(event, setActualUrgent)}
-            value={actualUrgent}
-          />
-          Important{" "}
-          <Checkbox
-            inputRef={isImportantActualRef}
-            checked={actualImportant}
-            onChange={(event) =>
-              handleCheckEventChange(event, setActualImportant)
-            }
-            value={actualImportant}
-          /> */}
         </DialogContent>
 
         <DialogActions>
