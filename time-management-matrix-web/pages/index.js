@@ -64,7 +64,7 @@ function Home(props) {
         <Grid item xs={10} sx={{ display: "flex", justifyContent: "center" }}>
           <Image
             src="/header-tag-line-quotes.svg"
-            alt="Picture of the author"
+            alt="header-tag-line"
             width={700}
             height={80}
           />
@@ -84,7 +84,7 @@ function Home(props) {
         >
           <Image
             src="/main-page.png"
-            alt="Picture of the author"
+            alt="main-page"
             width={450}
             height={300}
             sx={{
@@ -102,7 +102,7 @@ function Home(props) {
             <a>
               <Image
                 src="/manage-task.svg"
-                alt="Picture of the author"
+                alt="manage-task"
                 width={700}
                 height={80}
               />
