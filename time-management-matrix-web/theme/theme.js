@@ -10,6 +10,21 @@ export const buttonOrageOutlineTheme = createTheme({
 
 let theme = createTheme();
 
+export const addNewTaskTime = createTheme(theme, {
+  components: {
+    MuiGrid: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          [theme.breakpoints.down("sm")]: {
+            paddingTop: "1em",
+          },
+        },
+      },
+    },
+  },
+});
+
 export const topAppBarTheme = createTheme(theme, {
   components: {
     // Name of the component

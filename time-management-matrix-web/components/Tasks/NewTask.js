@@ -13,6 +13,8 @@ import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import Box from "@mui/material/Box";
+import { Grid } from "@mui/material";
+import { addNewTaskTime } from "../../theme/theme";
 
 function NewTask(props) {
   const [open, setOpen] = useState(props.open);
@@ -171,68 +173,82 @@ function NewTask(props) {
           Plan a new Task
         </DialogTitle>
         <DialogContent style={{ paddingTop: "1em" }}>
-          <TimePicker
-            label="Start Time"
-            value={startTime}
-            onChange={(newValue) => {
-              setStartTime(newValue);
-            }}
-            inputRef={startTimeInputRef}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                required
-                error={isStartTimeError === true}
-                sx={{ padding: "0em 0.5em" }}
+          <Grid container>
+            <Grid item xs={12} sm={6}>
+              <TimePicker
+                label="Start Time"
+                value={startTime}
+                onChange={(newValue) => {
+                  setStartTime(newValue);
+                }}
+                inputRef={startTimeInputRef}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    required
+                    error={isStartTimeError === true}
+                    // sx={{ padding: "0em 0.5em" }}
+                  />
+                )}
               />
-            )}
-          />
-          <TimePicker
-            label="End Time"
-            value={endTime}
-            onChange={(newValue) => {
-              setEndTime(newValue);
-            }}
-            inputRef={endTimeInputRef}
-            renderInput={(params) => (
+            </Grid>
+            <ThemeProvider theme={addNewTaskTime}>
+              <Grid item xs={12} sm={6}>
+                <TimePicker
+                  label="End Time"
+                  value={endTime}
+                  onChange={(newValue) => {
+                    setEndTime(newValue);
+                  }}
+                  inputRef={endTimeInputRef}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      required
+                      error={isEndTimeError === true}
+                      // sx={{ padding: "0em 0.5em" }}
+                    />
+                  )}
+                />
+              </Grid>
+            </ThemeProvider>
+            <Grid item xs={12}>
               <TextField
-                {...params}
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Planned Task"
+                fullWidth
+                variant="standard"
+                inputRef={plannedTaskInputRef}
                 required
-                error={isEndTimeError === true}
-                sx={{ padding: "0em 0.5em" }}
+                error={isTaskError === true}
+                // helperText={isError === true ? "Planned task is mandatory" : ""}
               />
-            )}
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Planned Task"
-            fullWidth
-            variant="standard"
-            inputRef={plannedTaskInputRef}
-            required
-            error={isTaskError === true}
-            // helperText={isError === true ? "Planned task is mandatory" : ""}
-          />
-          Urgent{" "}
-          <Checkbox
-            inputRef={isUrgentPlannedRef}
-            checked={plannedUrgent}
-            onChange={(event) =>
-              handleCheckEventChange(event, setPlannedUrgent)
-            }
-            value={plannedUrgent}
-          />
-          Important{" "}
-          <Checkbox
-            inputRef={isImportantPlannedRef}
-            checked={plannedImportant}
-            onChange={(event) =>
-              handleCheckEventChange(event, setPlannedImportant)
-            }
-            value={plannedImportant}
-          />
+            </Grid>
+            <Grid item xs={6} sm={2}>
+              Ugt
+              <Checkbox
+                inputRef={isUrgentPlannedRef}
+                checked={plannedUrgent}
+                onChange={(event) =>
+                  handleCheckEventChange(event, setPlannedUrgent)
+                }
+                value={plannedUrgent}
+              />
+            </Grid>
+            <Grid item xs={6} sm={2}>
+              Imp{" "}
+              <Checkbox
+                inputRef={isImportantPlannedRef}
+                checked={plannedImportant}
+                onChange={(event) =>
+                  handleCheckEventChange(event, setPlannedImportant)
+                }
+                value={plannedImportant}
+              />
+            </Grid>
+          </Grid>
         </DialogContent>
 
         <DialogActions>
